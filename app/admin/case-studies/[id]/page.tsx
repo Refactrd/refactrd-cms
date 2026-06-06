@@ -29,6 +29,7 @@ export default function EditCaseStudyPage() {
   const [slug, setSlug] = useState('')
   const [clientName, setClientName] = useState('')
   const [industry, setIndustry] = useState('')
+  const [authorName, setAuthorName] = useState('')
   const [excerpt, setExcerpt] = useState('')
   const [challenge, setChallenge] = useState('')
   const [solution, setSolution] = useState('')
@@ -85,6 +86,7 @@ export default function EditCaseStudyPage() {
       setMetaTitle(data.meta_title || '')
       setMetaDescription(data.meta_description || '')
       setTags(data.tags ? data.tags.join(', ') : '')
+      setAuthorName(data.author_name || '')
     } catch (error) {
       console.error('Error fetching case study:', error)
       toast({
@@ -169,6 +171,7 @@ export default function EditCaseStudyPage() {
           slug: slug || slugify(title),
           client_name: clientName,
           industry,
+          author_name: authorName || null,
           excerpt,
           problem: challenge,
           solution: solution,
@@ -287,6 +290,19 @@ export default function EditCaseStudyPage() {
               onChange={(e) => setIndustry(e.target.value)}
               placeholder="e.g., Fintech, E-commerce, Healthcare"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="authorName">Author Name</Label>
+            <Input
+              id="authorName"
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              placeholder="e.g., Oyin Dawodu, Refactrd Team"
+            />
+            <p className="text-xs text-gray-500">
+              Displayed as the author on the public case study page.
+            </p>
           </div>
         </div>
 

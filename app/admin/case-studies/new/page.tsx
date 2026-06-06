@@ -37,6 +37,7 @@ export default function NewCaseStudyPage() {
   const [metaTitle, setMetaTitle] = useState('')
   const [metaDescription, setMetaDescription] = useState('')
   const [tags, setTags] = useState('')
+  const [authorName, setAuthorName] = useState('')
   const [loading, setLoading] = useState(false)
   const [autoSlug, setAutoSlug] = useState(true)
   const [showImageUpload, setShowImageUpload] = useState(false)
@@ -131,6 +132,7 @@ export default function NewCaseStudyPage() {
           tags: tagsArray,
           featured_image_url: featuredImage || null,
           author_id: user?.id,
+          author_name: authorName || null,
         })
         .select()
         .single()
@@ -230,6 +232,19 @@ export default function NewCaseStudyPage() {
               onChange={(e) => setIndustry(e.target.value)}
               placeholder="e.g., Fintech, E-commerce, Healthcare"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="authorName">Author Name</Label>
+            <Input
+              id="authorName"
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              placeholder="e.g., Oyin Dawodu, Refactrd Team"
+            />
+            <p className="text-xs text-gray-500">
+              Displayed as the author on the public case study page.
+            </p>
           </div>
         </div>
 
